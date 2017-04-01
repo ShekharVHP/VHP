@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private EditText mEmailField,mPasswordField;
     TextView register;
     private String Email ;
-    Model_userDetails model_userDetails = new Model_userDetails(); ;
 
 
     @Override
@@ -63,11 +62,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user!=null) {
 
-                   // new HttpCall().checkGoogleEmail(context, Email);
+                    Email = user.getEmail();
+                    new HttpCall().checkGoogleEmail(context, Email);
+
+                    /*Intent i = new Intent(LoginActivity.this, AccountActivity.class);
+                    i.putExtra("Email", user.getEmail());
+                    startActivity(i);*/
 
                 }
 
                 else
+
                     Log.d("AUTH","User logged out");
             }
         };
@@ -116,8 +121,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             {
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-                Email = mAuth.getCurrentUser().getEmail();
-                new HttpCall().checkGoogleEmail(context, Email);
+
             }
             else
                 Log.d(TAG,"Google login failed ");
@@ -166,7 +170,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             progressDialog.dismiss();
 
                             if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(LoginActivity.this, AccountActivity.class);
                                 i.putExtra("Email", mAuth.getCurrentUser().getEmail());
                                 startActivity(i);
