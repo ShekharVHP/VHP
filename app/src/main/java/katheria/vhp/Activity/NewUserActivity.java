@@ -68,6 +68,7 @@ public class NewUserActivity extends AppCompatActivity {
                                     Bundle bundlenew = new Bundle();
                                     bundlenew.putString("Email",Email);
                                     Intent i = new Intent(NewUserActivity.this, RegisterActivity.class).putExtras(bundlenew);
+                                    firebaseAuth.getCurrentUser().sendEmailVerification();
                                     startActivity(i);
                                 }
                                 else

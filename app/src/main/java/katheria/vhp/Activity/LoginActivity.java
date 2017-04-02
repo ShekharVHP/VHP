@@ -60,16 +60,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user!=null) {
 
+
+                if (user != null) {
+                    if (mAuth.getInstance().getCurrentUser().isEmailVerified())
+                    {
                     Email = user.getEmail();
                     new HttpCall().checkGoogleEmail(context, Email);
-
-                    /*Intent i = new Intent(LoginActivity.this, AccountActivity.class);
-                    i.putExtra("Email", user.getEmail());
-                    startActivity(i);*/
-
                 }
+
+
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Email\n" + user.getEmail()+" not verified.\nPlease verify it first then login", Toast.LENGTH_LONG).show();
+                    mAuth.getCurrentUser().sendEmailVerification();
+                    FirebaseAuth.getInstance().signOut();
+                }
+            }
 
                 else
 
@@ -170,15 +177,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             progressDialog.dismiss();
 
                             if (task.isSuccessful()) {
-                                Intent i = new Intent(LoginActivity.this, AccountActivity.class);
-                                i.putExtra("Email", mAuth.getCurrentUser().getEmail());
-                                startActivity(i);
-                            } else {
+                               /* if (mAuth.getCurrentUser().isEmailVerified())
+                                {
+
+                                    Email = mAuth.getCurrentUser().getEmail();
+                                   // new HttpCall().checkGoogleEmail(context, Email);
+                                    }
+
+                                else
+                                {
+                                    Toast.makeText(LoginActivity.this, "Email not verified", Toast.LENGTH_SHORT).show();
+                                    mAuth.getCurrentUser().sendEmailVerification();
+                                    FirebaseAuth.getInstance().signOut();
+                                }*/}
+
+                             else {
                                 Log.e("ERROR", task.getException().toString());
                                 Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
                             }
-                        }
+
+                            }
+
+
                     });}
 
     }

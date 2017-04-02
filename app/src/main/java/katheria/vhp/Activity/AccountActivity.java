@@ -3,6 +3,7 @@ package katheria.vhp.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import katheria.vhp.Fragment.HomeFragment;
 import katheria.vhp.Fragment.ProfileFragment;
@@ -29,6 +33,8 @@ public class AccountActivity extends AppCompatActivity
     Context context = AccountActivity.this;
     NavigationView navigationView = null;
     Toolbar toolbar = null;
+    private FirebaseAuth mAuth;
+    public FirebaseAuth.AuthStateListener mAuthListener;
     TextView nav_name,nav_email;
     public static DataParser dp;
     String Name ,Email;
@@ -42,7 +48,29 @@ public class AccountActivity extends AppCompatActivity
         setContentView(R.layout.activity_account);
         Bundle bundle =getIntent().getExtras();
         useremail=bundle.getString("Email");
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+                if (mAuth.getInstance().getCurrentUser().isEmailVerified()){
+
+                }
+
+                else
+                {
+                    Toast.makeText(AccountActivity.this, "Email " + user.getEmail()+" not verified", Toast.LENGTH_SHORT).show();
+                    mAuth.getCurrentUser().sendEmailVerification();
+                    FirebaseAuth.getInstance().signOut();
+                }
+                }
+        };
         Toast.makeText(AccountActivity.this,"Welcome you are logged in using,\n" + useremail,Toast.LENGTH_LONG).show();
+
         new HttpCall().getUserDetails(context, useremail);
         HomeFragment fragment = new HomeFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

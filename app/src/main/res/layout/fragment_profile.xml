@@ -85,20 +85,6 @@
                     app:met_primaryColor="@color/colorPrimary" />
 
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/frag_dateOfBirth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Date of Birth"
-                    android:inputType="date"
-                    android:lines="1"
-                    android:maxLength="10"
-                    app:met_clearButton="true"
-                    app:met_floatingLabel="normal"
-                    app:met_floatingLabelText="Date of Birth"
-                    app:met_iconLeft="@drawable/ic_date_range_black_24dp"
-                    app:met_iconPadding="0dp"
-                    app:met_primaryColor="@color/colorPrimary" />
 
                 <Spinner
                     android:id="@+id/spinner_designation"
@@ -156,7 +142,7 @@
                     android:lines="1"
                     app:met_clearButton="true"
                     app:met_floatingLabel="normal"
-                    app:met_floatingLabelText="Name"
+                    app:met_floatingLabelText="District"
                     app:met_iconLeft="@drawable/ic_location_city_black_24dp"
                     app:met_iconPadding="0dp"
                     app:met_primaryColor="@color/colorPrimary" />
@@ -172,7 +158,7 @@
                     android:lines="1"
                     app:met_clearButton="true"
                     app:met_floatingLabel="normal"
-                    app:met_floatingLabelText="Name"
+                    app:met_floatingLabelText="State"
                     app:met_iconLeft="@drawable/ic_location_city_black_24dp"
                     app:met_iconPadding="0dp"
                     app:met_primaryColor="@color/colorPrimary" />
