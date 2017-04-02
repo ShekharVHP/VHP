@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         getSupportActionBar().hide();
         register = (TextView) findViewById(R.id.register);
 
@@ -68,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     Email = user.getEmail();
                     new HttpCall().checkGoogleEmail(context, Email);
 
+
+
                 }
 
 
@@ -82,6 +85,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 else
 
                     Log.d("AUTH","User logged out");
+
+
             }
         };
 

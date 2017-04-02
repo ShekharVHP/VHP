@@ -15,22 +15,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.LoginActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".Activity.LoginActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
         <activity
             android:name=".Activity.AccountActivity"
             android:label="@string/title_activity_account"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
         <activity android:name=".Activity.Splash" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.NewUserActivity" />
-        <activity android:name=".Activity.NewUserInputActivity" />
+        <activity android:name=".Activity.NewUserInputActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="katheria.vhp.Activity.NewUserInputActivity" />
+        </activity>
         <activity android:name=".Activity.SearchUserActivity"></activity>
     </application>
 

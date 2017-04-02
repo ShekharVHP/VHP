@@ -178,6 +178,9 @@ public class HttpCall extends AppCompatActivity{
                         result = new DataParser().parseCheckEmail(context, response);
                         if (result == 1) {
                             Intent intent = new Intent(context, AccountActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             intent.putExtra("Email", email);
                             context.startActivity(intent);
 
@@ -311,7 +314,7 @@ public class HttpCall extends AppCompatActivity{
     }
     public void getUserDetails(final Context context, String email) {
         RequestParams requestParams = new RequestParams();
-        Log.e("ABC2",email);
+       // Log.e("ABC2",email);
         requestParams.put("email", email);
 
         defineDialog(context);
