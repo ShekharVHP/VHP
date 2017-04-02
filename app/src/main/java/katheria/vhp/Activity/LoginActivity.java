@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     {
                     Email = user.getEmail();
                     new HttpCall().checkGoogleEmail(context, Email);
+
                 }
 
 
