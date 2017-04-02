@@ -176,23 +176,25 @@
                 app:met_primaryColor="@color/colorPrimary" />
 
 
+            <Spinner
+                android:id="@+id/spinner_state"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+
+                android:background="@drawable/spiiner_background">
+
+            </Spinner>
 
             <Spinner
                 android:id="@+id/spinner_district"
                 android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
                 android:layout_height="30dp"
                 android:background="@drawable/spiiner_background"/>
 
 
 
-            <Spinner
-                android:id="@+id/spinner_state"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/spiiner_background">
 
-            </Spinner>
 
 
 
