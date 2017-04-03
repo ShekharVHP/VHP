@@ -39,11 +39,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static int RC_SIGN_IN = 0 ;
     private static String TAG = "LOGIN_ACTIVITY";
     private GoogleApiClient mGoogleApiClient;
-    private FirebaseAuth mAuth;
+
     Context context = LoginActivity.this;
+    private FirebaseAuth mAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
     private EditText mEmailField,mPasswordField;
-    TextView register;
+    TextView register,forget;
     private String Email ;
 
 
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         getSupportActionBar().hide();
         register = (TextView) findViewById(R.id.register);
+        forget = (TextView) findViewById(R.id.forget);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -104,6 +106,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this,NewUserActivity.class));
+            }
+        });
+
+        forget.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,ForgetPassword.class));
             }
         });
 
