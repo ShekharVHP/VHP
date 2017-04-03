@@ -32,6 +32,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import katheria.vhp.Http.HttpCall;
 import katheria.vhp.Model.Model_userDetails;
 import katheria.vhp.R;
+import katheria.vhp.ShowProgressDialog;
 
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener ,OnClickListener{
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private EditText mEmailField,mPasswordField;
     TextView register,forget;
     private String Email ;
+    ShowProgressDialog showProgressDialog;
 
 
     @Override
@@ -56,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         getSupportActionBar().hide();
         register = (TextView) findViewById(R.id.register);
         forget = (TextView) findViewById(R.id.forget);
+        showProgressDialog = new ShowProgressDialog(context);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -183,13 +186,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         else
         {
 
-            final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Please wait...", "Proccessing...", true);
+            showProgressDialog.show();
 
             (mAuth.signInWithEmailAndPassword(email,password))
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
+                            showProgressDialog.dismiss();
 
                             if (task.isSuccessful()) {
                                /* if (mAuth.getCurrentUser().isEmailVerified())
